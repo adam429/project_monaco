@@ -1,0 +1,78 @@
+
+<% pages.each_with_index do |page,index| %>
+    <div id="page_<%=index%>">
+        <%= page %>
+    </div>
+<% end %>
+
+<script>
+    let total_pages = <%= pages.size %>
+    let cur_page = 0
+    let play_flag = 0
+    
+    keyhandler = function() {
+      console.log(event.keyCode)
+      if (event.keyCode == 37) {
+        left()
+      } else if (event.keyCode == 39) {
+        right()
+      } else if (event.keyCode == 13) {
+        play()
+      }
+     }
+     
+     play = function() {
+       right()
+       if (play_flag==0) { play_flag=1 } else { play_flag=0 }
+     }
+     
+     left = function() {
+       cur_page=cur_page-1;
+       if (cur_page<0) {
+         cur_page=total_pages-1
+       }
+       update()
+     }
+    
+     right = function() {
+       cur_page=cur_page+1;
+       if (cur_page>=total_pages) {
+         cur_page=0
+       }
+       update()
+     }
+     
+     update = function() {
+      for (let i = 0; i < total_pages ; i++) {
+        console.log ("#page_"+i)
+        $("#page_"+i).hide()
+      }
+      
+      $("#page_"+cur_page).show()
+          
+     }
+     
+     time_callback = function() {
+         if (play_flag==1) { 
+        if (cur_page==total_pages-1) {
+          play_flag= 0
+        } else {
+              right()   
+        }
+       }
+     
+     }
+    
+    init = function() {
+        update()
+    
+      document.addEventListener("keyup", this.keyhandler);
+      setInterval(time_callback, 500)
+    }
+    
+    init()
+    
+    
+    
+    
+</script>

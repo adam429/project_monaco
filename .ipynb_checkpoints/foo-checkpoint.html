@@ -1,0 +1,64 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'/> <script src='http://unpkg.com/vue/dist/vue.js'></script><script src='http://unpkg.com/jquery@3.6.0/dist/jquery.js'></script><script src='http://www.gstatic.com/charts/loader.js'></script><script src='http://unpkg.com/chart.js@2.9.3/dist/Chart.bundle.js'></script><script src='http://unpkg.com/chartkick@2.3.0/chartkick.js'></script><script src='http://unpkg.com/vue-chartkick@0.5.1/dist/vue-chartkick.js'></script><script src='http://unpkg.com/element-ui/lib/index.js'></script><link rel='stylesheet' href='https://unpkg.com/element-ui/lib/theme-chalk/index.css'></head><body>
+
+    <div id="page_0">
+        <b>1</b>23
+    </div>
+
+    <div id="page_1">
+        456
+    </div>
+
+    <div id="page_2">
+        789
+    </div>
+
+
+
+<script>
+    let total_pages = 3
+    let cur_page = 0
+
+    keyhandler = function() {
+    console.log(event.keyCode)
+    if (event.keyCode == 37) {
+        left()
+    } else if (event.keyCode == 39) {
+        right()
+    }
+    }
+    
+    left = function() {
+    cur_page=cur_page-1;
+    if (cur_page<0) {
+        cur_page=total_pages-1
+    }
+    update()
+    }
+
+    right = function() {
+    cur_page=cur_page+1;
+    if (cur_page>=total_pages) {
+        cur_page=0
+    }
+    update()
+    }
+    
+    update = function() {
+    for (let i = 0; i < total_pages ; i++) {
+        console.log ("#page_"+i)
+        $("#page_"+i).hide()
+    }
+    
+    $("#page_"+cur_page).show()
+        
+    }
+
+    init = function() {
+        update()
+
+    document.addEventListener("keyup", this.keyhandler);
+    }
+
+    init()
+
+</script></body></html>

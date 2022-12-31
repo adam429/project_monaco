@@ -1,0 +1,33 @@
+
+<% id =  SecureRandom.alphanumeric(10) %>
+<div id="app_<%=id %>">
+
+<el-container>
+  <el-main>
+   <% data.each do |row| %>
+    <el-row :gutter="24" type="flex" align="middle" justify="center">
+    <el-col :span=<%= 1 %> style="text-align:center">
+      <b><%= row[:row_name] %></b>
+    </el-col>
+    
+      <% row[:row_data].each do |item| %>
+        <el-col :span=<%= (23/row[:row_data].size).floor %> style="text-align:center;">
+          <b><%= item[0] %></b>
+          <div style="height:50%">
+            <%= item[1] %>
+          </div>
+        </el-col>
+      <% end %>
+    </el-row>
+   <% end %>
+  </el-main>
+</el-container>
+</div>
+
+<script>
+  Vue.use(VueChartkick.use(Chart))
+
+  app = new Vue({
+    el: '#app_<%=id %>',
+  })
+</script>

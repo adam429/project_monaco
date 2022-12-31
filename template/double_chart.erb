@@ -1,0 +1,28 @@
+
+<% id =  SecureRandom.alphanumeric(10) %>
+<div id="app_<%=id %>">
+
+<el-container>
+  <el-main>
+    <el-row :gutter="24">
+      <el-col :span=12 style="text-align:center">
+        <b>值</b>
+        <%= left %>
+      </el-col>
+      <el-col :span=12 style="text-align:center" >
+        <b>一阶变化值</b>
+        <%= right %>
+      </el-col>
+    </el-row>
+  </el-main>
+</el-container>
+</div>
+
+<script>
+  Vue.use(VueChartkick.use(Chart))
+
+  app = new Vue({
+    el: '#app_<%=id %>',
+  })
+</script>
+
